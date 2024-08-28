@@ -1,14 +1,33 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./notes.module.scss";
-import {
-  faCheck,
-  faPencil,
-  faTimes,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+import { Note } from "../../lib/models/note.model";
+import Loader from "../../lib/components/loader/loader";
+import { NotesService } from "../../lib/services/notes.service";
 
 const Notes = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [notes, setNotes] = useState<Note[]>([]);
+  const service = useMemo(() => new NotesService(), []);
+
+  useEffect(() => {
+    service
+      .all()
+      .then((notes) => {
+        console.log(notes);
+        setNotes(notes);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   const removeNote = (id: string) => {
     // remove note
   };
@@ -28,8 +47,14 @@ const Notes = () => {
           <div className={styles.cell}>2024-12-31</div>
           <div className={`${styles.cell} ${styles.actions}`}>
             <FontAwesomeIcon icon={faCheck} className={styles.compete} />
-            <FontAwesomeIcon icon={faPencil} className={styles.edit} />
-            <FontAwesomeIcon icon={faTrash} className={styles.remove} />
+            <NavLink to={`/notes/[note-id]`} className={styles.edit}>
+              <FontAwesomeIcon icon={faPencil} className={styles.edit} />
+            </NavLink>
+            <FontAwesomeIcon
+              icon={faTrash}
+              className={styles.remove}
+              onClick={() => removeNote("id...")}
+            />
           </div>
         </div>
       </div>
