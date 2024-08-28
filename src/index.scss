@@ -1,0 +1,55 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --bg-color: #f5f5f5;
+  --btn-default-bg-color: #f3f3f3;
+  --btn-default-bg-color-hover: #e3e3e3;
+  --btn-default-color: #666;
+
+  --red: #990000;
+  --blue: #4cb9fa;
+  --green: #00a000;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-color);
+
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    padding: 0;
+  }
+
+  button,
+  .button {
+    display: inline-block;
+    border: solid 3px #fff;
+    background-color: var(--btn-default-bg-color);
+    color: var(--btn-default-color);
+    line-height: 30px;
+    padding: 0 20px;
+    outline: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 12px;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      border-color: var(--btn-default-bg-color);
+      background-color: var(--btn-default-bg-color-hover);
+    }
+  }
+}
