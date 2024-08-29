@@ -70,4 +70,13 @@ body {
     color: var(--red);
     font-size: 12px;
   }
+
+  form {
+    .footer {
+      display: flex;
+      flex-direction: row;
+      margin: 10px 0;
+      justify-content: space-between;
+    }
+  }
 }

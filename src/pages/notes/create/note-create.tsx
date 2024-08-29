@@ -8,23 +8,31 @@ import { NotesService } from "../../../lib/services/notes.service";
 const NoteCreate = () => {
   const navigate = useNavigate();
   const [error, setError] = useState<string>();
+  const [saving, setSaving] = useState(false);
   const service = useMemo(() => new NotesService(), []);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    setSaving(() => true);
 
     const formData = new FormData(event.currentTarget);
     const task = formData.get("task") as string;
     const dueDate_str = formData.get("dueDate") as string;
     const dueDate = new Date(dueDate_str);
 
-    service.create(task, dueDate).then((note) => {
-      if (note) {
-        navigate("/notes");
-      } else {
-        setError("Failed to create note");
-      }
-    });
+    service
+      .create(task, dueDate)
+      .then((note) => {
+        if (note) {
+          navigate("/notes");
+        } else {
+          setError("Failed to create note");
+        }
+      })
+      .finally(() => {
+        setSaving(() => false);
+      });
   };
 
   const now = new Date();
@@ -43,6 +51,7 @@ const NoteCreate = () => {
           required
           minLength={5}
           maxLength={250}
+          disabled={saving}
         />
         <Input
           type="date"
@@ -50,14 +59,15 @@ const NoteCreate = () => {
           name="dueDate"
           min={dateFormat(now, "yyyy-mm-dd")}
           required
+          disabled={saving}
         />
       </div>
 
-      <div className={styles.footer}>
+      <div className="footer">
         <NavLink to="/notes" className="button">
           Back
         </NavLink>
-        <button type="submit" className="button">
+        <button type="submit" className="button" disabled={saving}>
           Create
         </button>
       </div>

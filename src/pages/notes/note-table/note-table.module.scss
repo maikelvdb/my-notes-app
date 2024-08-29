@@ -1,0 +1,55 @@
+.table {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 100px 55px;
+  margin-bottom: 20px;
+
+  .empty {
+    grid-column: 1 / span 3;
+    text-align: center;
+    font-style: italic;
+    color: var(--grey);
+  }
+
+  .row {
+    display: contents;
+
+    &.header {
+      .cell {
+        font-weight: 700;
+      }
+    }
+
+    .cell {
+      &.actions {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: right;
+
+        svg {
+          margin-top: 5px;
+          opacity: 0.5;
+          cursor: pointer;
+          transition: all 0.2s ease-in-out;
+
+          &:hover {
+            opacity: 1;
+          }
+
+          &.remove {
+            color: var(--red);
+          }
+
+          &.edit {
+            color: var(--blue);
+          }
+
+          &.compete {
+            color: var(--green);
+          }
+        }
+      }
+    }
+  }
+}
