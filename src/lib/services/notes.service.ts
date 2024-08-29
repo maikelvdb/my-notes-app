@@ -14,15 +14,13 @@ export class NotesService {
   all = (): Promise<Note[]> => {
     return this.client
       .get<Note[]>(this.baseUrl)
-      .then((response) => response.data)
-      .catch((error) => error);
+      .then((response) => response.data);
   };
 
   find = (id: string): Promise<Note> => {
     return this.client
       .get<Note>(`${this.baseUrl}/${id}`)
-      .then((response) => response.data)
-      .catch((error) => error);
+      .then((response) => response.data);
   };
 
   create = (task: string, dueDate: Date): Promise<Note> => {
@@ -34,8 +32,7 @@ export class NotesService {
         created: new Date(),
         completed: false,
       })
-      .then((response) => response.data)
-      .catch((error) => error);
+      .then((response) => response.data);
   };
 
   update = (
@@ -50,8 +47,7 @@ export class NotesService {
         dueDate,
         completed,
       })
-      .then((response) => response.data)
-      .catch((error) => error);
+      .then((response) => response.data);
   };
 
   delete = async (id: string): Promise<void> => {

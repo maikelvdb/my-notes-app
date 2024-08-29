@@ -4,6 +4,13 @@
     display: grid;
     grid-template-columns: 1fr 100px 55px;
 
+    .empty {
+      grid-column: 1 / span 3;
+      text-align: center;
+      font-style: italic;
+      color: var(--grey);
+    }
+
     .row {
       display: contents;
 
