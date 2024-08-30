@@ -12,7 +12,10 @@ const Notes = () => {
   const [notes, setNotes] = useState<Note[]>([]);
   const service = useMemo(() => new NotesService(), []);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    // pas op true zetten als de service de notes heeft opgehaald
+    setIsLoading(() => false);
+  }, []);
 
   if (isLoading) {
     return <Loader />;
